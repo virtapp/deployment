@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: innovi-portal-test
-        image: agentvi/innovi-portal:latest
+        image: agentvi/innovi-portal:2.1.rc-2245
         envFrom: 
         - configMapRef:
             name: innovi-portal-config
