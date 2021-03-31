@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: innovi-portal-test
+  name: innovi-portal-argo
   labels:
-    app: innovi-portal-test
+    app: innovi-portal-argo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: innovi-portal-test
+      app: innovi-portal-argo
   template:
     metadata:
       labels:
-        app: innovi-portal-test
+        app: innovi-portal-argo
     spec:
       containers:
-      - name: innovi-portal-test
+      - name: innovi-portal-argo
         image: agentvi/innovi-portal:2.1.rc-2245
         envFrom: 
         - configMapRef:
