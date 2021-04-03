@@ -25,7 +25,7 @@ metadata:
 spec:
   selector:
     app: httpd-server
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: httpd-server-port
       port: 8080
