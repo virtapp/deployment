@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: httpd
+        image: webdevops/php-apache
         ports:
           - name: http-port
             containerPort: 80
