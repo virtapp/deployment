@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +18,7 @@ spec:
       - name: httpd-server
         image: httpd
         ports:
-          - name: httpd-server-port
+          - name: http-port
             containerPort: 80
       restartPolicy: Always
       nodeSelector:
@@ -36,6 +35,6 @@ spec:
     app: httpd-server
   type: ClusterIP
   ports:
-    - name: httpd-server-port
+    - name: http-port
       port: 8080
       targetPort: 80
