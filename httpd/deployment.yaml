@@ -1,9 +1,15 @@
+
+apiVersion: apps/v1
 kind: Deployment
-apiVersion: apps/v1beta1
 metadata:
   name: httpd-server
+  labels:
+    app: httpd-server
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: httpd-server
   template:
     metadata:
       labels:
@@ -13,9 +19,12 @@ spec:
       - name: httpd-server
         image: httpd
         ports:
-        - containerPort: 80
+          - name: httpd-server-port
+            containerPort: 80
+      restartPolicy: Always
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
+
 ---
 
 kind: Service
