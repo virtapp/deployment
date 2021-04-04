@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: virtapp/apache2:0.1
+        image: virtapp/apache2:0.2
         ports:
           - name: http-port
             containerPort: 80
