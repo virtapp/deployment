@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: rancher/rancher:v2.4.2
-        #image: virtapp/apache:0.1
+        image: virtapp/apache:0.1
         ports:
           - name: http-port
             containerPort: 80
