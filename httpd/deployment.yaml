@@ -19,7 +19,7 @@ spec:
         image: manageiq/manageiq:kasparov-1
         ports:
           - name: http-port
-            containerPort: 443
+            containerPort: 8443
       restartPolicy: Always
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
