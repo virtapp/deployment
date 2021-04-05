@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: rancher/rancher
+        image: virtapp/apache2:0.2
         ports:
           - name: http-port
-            containerPort: 443
+            containerPort: 80
       restartPolicy: Always
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
@@ -37,5 +37,5 @@ spec:
   type: ClusterIP
   ports:
     - name: http-port
-      port: 443
-      targetPort: 443
+      port: 8080
+      targetPort: 80
