@@ -1,3 +1,4 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,10 +17,10 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: manageiq/manageiq:kasparov-1
+        image: rancher/rancher
         ports:
           - name: http-port
-            containerPort: 8443
+            containerPort: 443
       restartPolicy: Always
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
@@ -37,4 +38,4 @@ spec:
   ports:
     - name: http-port
       port: 443
-      targetPort: 8443
+      targetPort: 443
