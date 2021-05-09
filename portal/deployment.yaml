@@ -28,3 +28,25 @@ spec:
       restartPolicy: Always
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
+
+
+# innovi-portal service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: innovi-portal-argo
+  namespace: default
+  labels:
+    app: "innovi-portal-argo"
+  annotations: {}
+    #cloud.google.com/neg: '{"ingress": true}'
+    #beta.cloud.google.com/backend-config: '{"ports": {"8082":"innovi-portal-backendconfig"}}'
+spec:
+  selector:
+    app: "innovi-portal-argo"
+  ports:
+    - port: 8082
+      protocol: TCP
+      targetPort: 8082
+  type: NodePort
