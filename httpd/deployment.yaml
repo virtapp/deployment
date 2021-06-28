@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: httpd-server
-        image: agentvi/innovi-get:0.2
+        image: agentvi/innovi-get:2.1.10
         ports:
           - name: http-port
             containerPort: 80
