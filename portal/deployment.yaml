@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: innovi-portal-argo
-        image: agentvi/innovi-portal:2.1.rc-2245
+        image: agentvi/innovi-portal:2.1.rc-2569
         envFrom: 
         - configMapRef:
             name: innovi-portal-config
