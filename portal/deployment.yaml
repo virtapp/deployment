@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: innovi-portal-argo
+  name: portal-argo
   labels:
-    app: innovi-portal-argo
+    app: portal-argo
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: innovi-portal-argo
+      app: portal-argo
   template:
     metadata:
       labels:
-        app: innovi-portal-argo
+        app: portal-argo
     spec:
       containers:
-      - name: innovi-portal-argo
-        image: agentvi/innovi-portal:2.1.rc-2569
+      - name: portal-argo
+        image: virtapp/portal-argo:2.1
         envFrom: 
         - configMapRef:
             name: innovi-portal-config
         ports:
           - name: portal-port
-            containerPort: 8082
+            containerPort: 80
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always
@@ -35,18 +35,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: innovi-portal-argo
+  name: portal-argo
   namespace: default
   labels:
-    app: "innovi-portal-argo"
+    app: "portal-argo"
   annotations: {}
     #cloud.google.com/neg: '{"ingress": true}'
     #beta.cloud.google.com/backend-config: '{"ports": {"8082":"innovi-portal-backendconfig"}}'
 spec:
   selector:
-    app: "innovi-portal-argo"
+    app: "portal-argo"
   ports:
-    - port: 8082
+    - port: 80
       protocol: TCP
-      targetPort: 8082
+      targetPort: 80
   type: NodePort
