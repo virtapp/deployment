@@ -19,7 +19,7 @@ spec:
         image: virtapp/portal-argo:2.1
         envFrom: 
         - configMapRef:
-            name: innovi-portal-config
+            name: argo-config
         ports:
           - name: portal-port
             containerPort: 80
