@@ -22,8 +22,8 @@ spec:
           - name: http-port
             containerPort: 80
       restartPolicy: Always
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
+      nodeSelector: {}
+        #cloud.google.com/gke-nodepool: default-pool
 
 ---
 
