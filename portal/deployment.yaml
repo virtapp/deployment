@@ -30,7 +30,7 @@ spec:
         cloud.google.com/gke-nodepool: default-pool
 
 
-# innovi-portal service
+
 ---
 apiVersion: v1
 kind: Service
