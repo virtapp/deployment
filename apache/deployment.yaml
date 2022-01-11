@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpd-server
+  name: apache
   labels:
-    app: httpd-server
+    app: apache
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: httpd-server
+      app: apache
   template:
     metadata:
       labels:
-        app: httpd-server
+        app: apache
     spec:
       containers:
-      - name: httpd-server
-        image: virtapp/apache:0.3
+      - name: apache
+        image: global-registry.virtapp.io/library/apache-php:7.2
         ports:
           - name: http-port
             containerPort: 80
@@ -30,10 +30,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: httpd-server
+  name: apache
 spec:
   selector:
-    app: httpd-server
+    app: apache
   type: ClusterIP
   ports:
     - name: http-port
