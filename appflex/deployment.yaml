@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-appflex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-appflex
+  template:
+    metadata:
+      labels:
+        app: wordpress-appflex
+    spec:
+      containers:
+      - name: wordpress
+        image: global-registry.virtapp.io/library/apache-php:7.1
+        ports:
+        - containerPort: 80
+        env:
+            - name: WORDPRESS_DB_HOST
+              value: mysql
+            - name: WORDPRESS_DB_NAME
+              value: appflex
+            - name: WORDPRESS_DB_USER
+              value: root
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-appflex
+              topologyKey: "kubernetes.io/hostname"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-appflex
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: wordpress-appflex
+
