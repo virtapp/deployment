@@ -13,7 +13,7 @@ spec:
         app: wordpress-appflex
     spec:
       containers:
-      - name: wordpress
+      - name: wordpress-appflex
         image: global-registry.virtapp.io/library/wordpress-appflex:0.8
         ports:
         - containerPort: 80
