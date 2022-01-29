@@ -13,7 +13,7 @@ spec:
         app: wordpress-appflex
     spec:
       containers:
-      - name: wordpress-appflex
+      - name: wordpress
         image: global-registry.virtapp.io/library/apache-appflex:0.44
         ports:
         - containerPort: 80
@@ -29,9 +29,6 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
-        volumeMounts:
-          - mountPath: data/appflex
-            name: vol1
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -54,4 +51,3 @@ spec:
     - port: 80
   selector:
     app: wordpress-appflex
-
