@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wordpress-appflex
-        image: global-registry.virtapp.io/library/wordpress-appflex:0.43 
+        image: global-registry.virtapp.io/library/apache-appflex:0.44
         ports:
         - containerPort: 80
         env:
