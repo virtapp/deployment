@@ -41,7 +41,7 @@ metadata:
     app: "portal-argo"
   annotations: {}
     #cloud.google.com/neg: '{"ingress": true}'
-    #beta.cloud.google.com/backend-config: '{"ports": {"8082":"innovi-portal-backendconfig"}}'
+    #beta.cloud.google.com/backend-config: '{"ports": {"8080":"portal-argo-backendconfig"}}'
 spec:
   selector:
     app: "portal-argo"
