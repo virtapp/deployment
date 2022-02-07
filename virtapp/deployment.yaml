@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-virtapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wordpress-virtapp
+  template:
+    metadata:
+      labels:
+        app: wordpress-virtapp
+    spec:
+      containers:
+      - name: wordpress
+        image: global-registry.virtapp.io/library/apache-php:7.2
+        ports:
+        - containerPort: 80
+        env:
+            - name: WORDPRESS_DB_HOST
+              value: mysql
+            - name: WORDPRESS_DB_NAME
+              value: virtapp_io
+            - name: WORDPRESS_DB_USER
+              value: root
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-virtapp
+              topologyKey: "kubernetes.io/hostname"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-virtapp
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: wordpress-virtapp
