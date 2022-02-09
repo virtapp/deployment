@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -15,6 +15,13 @@ spec:
       containers:
       - name: wordpress
         image: global-registry.virtapp.io/library/apache-appflex:0.46
+        resources:
+            requests:
+              memory: "1Gi"
+              cpu: 1
+            limits:
+              cpu: 2
+              memory: "2Gi"
         ports:
         - containerPort: 80
         env:
@@ -29,16 +36,8 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - wordpress-appflex
-              topologyKey: "kubernetes.io/hostname"
+      restartPolicy: Always
+      nodeSelector: {}
 ---
 
 apiVersion: v1
