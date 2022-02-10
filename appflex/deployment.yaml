@@ -42,7 +42,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: wordpress-persistent-storage
-          mountPath: /var/www/html/appflex
+          mountPath: /var/www/appflex
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
