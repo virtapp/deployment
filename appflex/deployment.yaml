@@ -40,7 +40,7 @@ spec:
         - name: wordpress-persistent-storage
           mountPath: /var/www/appflex
       volumes:
-      - name: wordpress-persistent-storage
+      - name: vol1
         persistentVolumeClaim:
           claimName: wordpress-data
       restartPolicy: Always
