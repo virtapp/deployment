@@ -37,6 +37,7 @@ spec:
                   name: mysql-pass
                   key: password
         volumeMounts:
+        - name: vol1
           mountPath: /var/www/appflex
       volumes:
       - name: vol1
