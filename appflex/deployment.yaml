@@ -37,7 +37,6 @@ spec:
                   name: mysql-pass
                   key: password
         volumeMounts:
-        - name: wordpress-persistent-storage
           mountPath: /var/www/appflex
       volumes:
       - name: vol1
