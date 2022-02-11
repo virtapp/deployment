@@ -37,11 +37,9 @@ spec:
                   name: mysql-pass
                   key: password
         volumeMounts:
-        - name: vol1
           mountPath: /data/appflex
           subPath: appflex
       volumes:
-      - name: vol1
         persistentVolumeClaim:
           claimName: data
       restartPolicy: Always
