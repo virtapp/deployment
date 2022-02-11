@@ -38,7 +38,7 @@ spec:
                   key: password
         volumeMounts:
         - name: vol1
-          mountPath: data/appflex
+          mountPath: mnt/data/appflex
           subPath: appflex
       volumes:
       - name: vol1
