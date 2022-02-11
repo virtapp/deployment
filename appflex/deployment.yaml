@@ -40,7 +40,6 @@ spec:
           mountPath: /data/appflex
           name: vol1
       volumes:
-        - name: vol1
         persistentVolumeClaim:
           claimName: data
       restartPolicy: Always
