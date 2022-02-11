@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: global-registry.virtapp.io/library/apache-appflex:0.43
+        image: global-registry.virtapp.io/library/apache-appflex:0.46
         resources:
             requests:
               memory: "1Gi"
@@ -36,12 +36,6 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
-        volumeMounts:
-          mountPath: /data/appflex
-          name: vol1
-      volumes:
-        persistentVolumeClaim:
-          claimName: data
       restartPolicy: Always
       nodeSelector: {}
 ---
