@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: global-registry.virtapp.io/library/apache-appflex:0.49
+        image: global-registry.virtapp.io/library/apache-appflex:0.46
         resources:
             requests:
               memory: "1Gi"
