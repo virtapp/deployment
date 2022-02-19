@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-appflex
+  labels:
+    app: wordpress-appflex
 spec:
   replicas: 6
   selector:
