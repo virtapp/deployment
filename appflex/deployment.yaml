@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 2
+  replicas: 6
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -12,6 +12,24 @@ spec:
       labels:
         app: wordpress-appflex
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/instance-type=k3s
+                operator: In
+                values:
+                - master
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - wordpress-appflex
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: wordpress
         image: global-registry.virtapp.io/library/apache-appflex:0.8
