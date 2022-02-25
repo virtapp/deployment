@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress-appflex
