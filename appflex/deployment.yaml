@@ -44,7 +44,7 @@ spec:
                   - key: "app"
                     operator: In
                     values:
-                    - wordpress-virtapp
+                    - wordpress-appflex
               topologyKey: "kubernetes.io/hostname"
       restartPolicy: Always
       nodeSelector: {}
