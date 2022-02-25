@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 6
+  replicas: 3
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -36,6 +36,16 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
+        affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-virtapp
+              topologyKey: "kubernetes.io/hostname"
       restartPolicy: Always
       nodeSelector: {}
 ---
