@@ -36,7 +36,7 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
-        affinity:
+      affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
@@ -45,7 +45,7 @@ spec:
                     operator: In
                     values:
                     - wordpress-appflex
-              topologyKey: "kubernetes.io/hostname"  
+              topologyKey: "kubernetes.io/hostname"
 
 ---
 
