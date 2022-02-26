@@ -43,6 +43,10 @@ spec:
           - mountPath: global-data/appflex
             name: vol1
             subPath: appflex
+      volumes:
+        - name: vol1
+          persistentVolumeClaim:
+            claimName: global-data
         env:
             - name: WORDPRESS_DB_HOST
               value: mysql
