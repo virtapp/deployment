@@ -59,17 +59,9 @@ spec:
         - name: vol1
           persistentVolumeClaim:
             claimName: global-data          
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - wordpress-appflex
-              topologyKey: "kubernetes.io/hostname"
-
+      restartPolicy: Always
+      nodeSelector: {}
+        #node-role.kubernetes.io/master: "true"
 ---
 
 apiVersion: v1
