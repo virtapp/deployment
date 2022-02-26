@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -35,17 +35,18 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysql-pass
-                  key: password
-        volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /var/www/appflex
-      volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: global-data         
-      restartPolicy: Always
-      nodeSelector: {}
-        #node-role.kubernetes.io/master: "true"
+                  key: password         
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-appflex
+              topologyKey: "kubernetes.io/hostname"
+
 ---
 
 apiVersion: v1
