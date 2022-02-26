@@ -37,13 +37,12 @@ spec:
                   name: mysql-pass
                   key: password
         volumeMounts:
-          - mountPath: global-data/appflex
-            name: vol1
-            subPath: appflex
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/appflex
       volumes:
-        - name: vol1
-          persistentVolumeClaim:
-            claimName: global-data          
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: global-data         
       restartPolicy: Always
       nodeSelector: {}
         #node-role.kubernetes.io/master: "true"
