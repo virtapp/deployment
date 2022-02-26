@@ -1,3 +1,18 @@
+---
+# global-data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: global-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: longhorn-nfs
+  resources:
+    requests:
+      storage: 10Gi
+---
+# global-data
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,6 +39,10 @@ spec:
               memory: "2Gi"
         ports:
         - containerPort: 80
+        volumeMounts:
+          - mountPath: global-data/appflex
+            name: vol1
+            subPath: appflex
         env:
             - name: WORDPRESS_DB_HOST
               value: mysql
