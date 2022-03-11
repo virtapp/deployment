@@ -41,7 +41,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/instance-type=k3s
+              - key: "kubernetes.io/instance-type=k3s"
                 operator: In
                 values:
                 - k3s
