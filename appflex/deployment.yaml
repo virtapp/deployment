@@ -46,7 +46,7 @@ spec:
                 values:
                 - wordpress-appflex
             topologyKey: kubernetes.io/hostname
-        nodeSelector: {}
+        #nodeSelector: {}
           #kubernetes.io/role: master
 
 ---
