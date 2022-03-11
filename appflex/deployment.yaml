@@ -54,6 +54,8 @@ spec:
                     values:
                     - wordpress-appflex
               topologyKey: "kubernetes.io/hostname"
+      restartPolicy: Always
+      nodeSelector: {}
 
 ---
 
