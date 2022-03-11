@@ -44,7 +44,7 @@ spec:
               - key: "kubernetes.io/role=master"
                 operator: In
                 values:
-                - master
+                - wordpress-appflex
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
