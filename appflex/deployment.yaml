@@ -46,8 +46,7 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password   
-          restartPolicy: Always
-          nodeSelector: {}
+     
      
 
 ---
