@@ -37,14 +37,6 @@ spec:
                   name: mysql-pass
                   key: password         
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch=amd64
-                operator: In
-                values:
-                - amd64
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
