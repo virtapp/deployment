@@ -20,7 +20,7 @@ spec:
               - key: kubernetes.io/os=linux
                 operator: In
                 values:
-                - OS
+                - ["TheChosenOne"]
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
