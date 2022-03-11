@@ -13,14 +13,6 @@ spec:
         app: wordpress-appflex
     spec:
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: "linux"
-                operator: In
-                values:
-                - kubernetes.io/os=linux
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
