@@ -17,10 +17,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/os=linux
+              - key: "linux"
                 operator: In
                 values:
-                - ["TheChosenOne"]
+                - kubernetes.io/os=linux
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
