@@ -17,10 +17,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: "beta.kubernetes.io/arch=amd64"
+              - key: kubernetes.io/os=linux
                 operator: In
                 values:
-                - amd64
+                - OS
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
