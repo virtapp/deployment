@@ -39,15 +39,13 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - wordpress-appflex
-            topologyKey: kubernetes.io/hostname
-        #nodeSelector: {}
-          #kubernetes.io/role: master
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-appflex
+              topologyKey: "kubernetes.io/hostname"
 
 ---
 
