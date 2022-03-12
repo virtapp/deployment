@@ -49,3 +49,24 @@ spec:
     - port: 80
   selector:
     app: wordpress-appflex
+
+---
+
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+ namespace: default
+ name: wordpress-appflex-scaledobject
+spec:
+ scaleTargetRef:
+   kind:          Deployment
+   name:          wordpress-appflex
+ pollingInterval: 20
+ minReplicaCount: 1
+ maxReplicaCount: 6
+triggers:
+- type: cpu
+  metadata:
+    # Required
+    type: Utilization/ AverageValue
+    value: "60"
