@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-appflex
 spec:
-  replicas: 6
+  replicas: 3
   selector:
     matchLabels:
       app: wordpress-appflex
@@ -12,27 +12,9 @@ spec:
       labels:
         app: wordpress-appflex
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: cluster-node-02
-                operator: In
-                values:
-                - ["TheChosenOne"]
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - wordpress-appflex
-            topologyKey: kubernetes.io/hostname
       containers:
       - name: wordpress
-        image: global-registry.virtapp.io/library/apache-appflex:0.9
+        image: global-registry.virtapp.io/library/apache-appflex:0.8
         resources:
             requests:
               memory: "1Gi"
@@ -53,9 +35,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysql-pass
-                  key: password   
-     
-     
+                  key: password         
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - wordpress-appflex
+              topologyKey: "kubernetes.io/hostname"
 
 ---
 
