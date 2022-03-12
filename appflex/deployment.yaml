@@ -57,7 +57,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
  namespace: default
- name: wordpress-appflex-scaledobject
+ name: wordpress-appflex
 spec:
  scaleTargetRef:
    kind:          Deployment
