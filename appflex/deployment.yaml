@@ -55,18 +55,27 @@ spec:
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
- namespace: default
- name: wordpress-appflex-scaledobject
+ namespace: yevgeni
+ name: simple-web-scaledobject
 spec:
  scaleTargetRef:
    kind:          Deployment
-   name:          wordpress-appflex
+   name:          simple-web
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 6
-triggers:
-- type: cpu
-  metadata:
-    # Required
-    type: Utilization/ AverageValue
-    value: "60"
+ maxReplicaCount: 10
+ advanced:
+   restoreToOriginalReplicaCount: false
+   horizontalPodAutoscalerConfig:
+     behavior:
+       scaleDown:
+         stabilizationWindowSeconds: 300
+         policies:
+         - type: Percent
+           value: 25
+           periodSeconds: 60
+ triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "70"
