@@ -13,6 +13,14 @@ spec:
         app: wordpress-appflex
     spec:
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cluster-node-02
+                operator: In
+                values:
+                - ["TheChosenOne"]
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
