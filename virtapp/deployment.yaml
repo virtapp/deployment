@@ -39,6 +39,7 @@ spec:
                     values:
                     - wordpress-virtapp
               topologyKey: "kubernetes.io/hostname"
+
 ---
 
 apiVersion: v1
@@ -68,7 +69,7 @@ spec:
  minReplicaCount: 1
  maxReplicaCount: 3
  triggers:
-  - type: cpu
+  - type: memory
   metadata:
     # Required
     type: Utilization/ AverageValue
