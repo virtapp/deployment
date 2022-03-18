@@ -68,7 +68,7 @@ spec:
  minReplicaCount: 1
  maxReplicaCount: 3
  triggers:
-- type: memory
+  - type: cpu
   metadata:
     # Required
     type: Utilization/ AverageValue
