@@ -58,9 +58,7 @@ spec:
  minReplicaCount: 1
  maxReplicaCount: 10
  triggers:
-  - type: cron
+  - type: memory
     metadata:
-      timezone: Asia/Jerusalem
-      start: 10 * * * *
-      end: 35 * * * *
-      desiredReplicas: "3"
+      type: Utilization
+      value: "50"
