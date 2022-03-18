@@ -76,11 +76,10 @@ spec:
            value: 25
            periodSeconds: 60
  triggers:
-- type: cron
-  metadata:
-    # Required
-    timezone: Asia/Jerusalem # The acceptable values would be a value from the IANA Time Zone Database.
-    start: 10 * * * *        # Every hour on the 30th minute
-    end: 45 * * * *          # Every hour on the 45th minute
-    desiredReplicas: "6"
+  - type: cron
+    metadata:
+      timezone: Asia/Jerusalem
+      start: 10 * * * *
+      end: 45 * * * *
+      desiredReplicas: "6"
 
