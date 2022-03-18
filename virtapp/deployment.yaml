@@ -72,5 +72,5 @@ spec:
   - type: memory
   metadata:
     # Required
-    type: Utilization/ AverageValue
-    value: "60"
+    type: Utilization
+    value: "50"
