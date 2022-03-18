@@ -80,6 +80,6 @@ spec:
     metadata:
       timezone: Asia/Jerusalem
       start: 10 * * * *
-      end: 45 * * * *
+      end: 35 * * * *
       desiredReplicas: "6"
 
