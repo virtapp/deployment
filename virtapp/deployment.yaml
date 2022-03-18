@@ -45,7 +45,6 @@ spec:
     
     
 ---
-
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
@@ -57,10 +56,11 @@ spec:
    name:          wordpress-virtapp
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 6
+ maxReplicaCount: 10
  triggers:
-  - type: memory
-  metadata:
-    # Required
-    type: Utilization
-    value: "50"
+  - type: cron
+    metadata:
+      timezone: Asia/Jerusalem
+      start: 10 * * * *
+      end: 35 * * * *
+      desiredReplicas: "3"
