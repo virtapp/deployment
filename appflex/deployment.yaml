@@ -70,7 +70,7 @@ spec:
    horizontalPodAutoscalerConfig:
      behavior:
        scaleDown:
-         stabilizationWindowSeconds: 300
+         stabilizationWindowSeconds: 60
          policies:
          - type: Percent
            value: 25
