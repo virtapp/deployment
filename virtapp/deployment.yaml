@@ -57,7 +57,7 @@ spec:
    name:          wordpress-virtapp
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 3
+ maxReplicaCount: 6
  triggers:
   - type: memory
   metadata:
