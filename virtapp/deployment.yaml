@@ -29,17 +29,7 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - wordpress-virtapp
-              topologyKey: "kubernetes.io/hostname"
-
+ 
 ---
 
 apiVersion: v1
