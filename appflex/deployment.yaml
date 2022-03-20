@@ -56,20 +56,36 @@ spec:
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
- namespace: default
- name: wordpress-appflex
+  namespace: default
+  name: wordpress-appflex 
 spec:
- scaleTargetRef:
-   kind:          Deployment
-   name:          wordpress-appflex
- pollingInterval: 20
- minReplicaCount: 1
- maxReplicaCount: 10
- triggers:
+  scaleTargetRef:
+    apiVersion:    apps/v1                           # Optional. Default: apps/v1
+    kind:          Deployment                        # Optional. Default: Deployment
+    name:          wordpress-appflex                 # Mandatory. Must be in the same namespace as the ScaledObject
+    envSourceContainerName: wordpress-appflex        # Optional. Default: .spec.template.spec.containers[0]
+  pollingInterval:  30                               # Optional. Default: 30 seconds
+  cooldownPeriod:   60                              # Optional. Default: 300 seconds
+  idleReplicaCount: 0                                # Optional. Default: ignored, must be less than minReplicaCount 
+  minReplicaCount:  1                                # Optional. Default: 0
+  maxReplicaCount:  10                               # Optional. Default: 100
+  fallback:                                          # Optional. Section to specify fallback options
+    failureThreshold: 3                              # Mandatory if fallback section is included
+    replicas: 6                                      # Mandatory if fallback section is included
+  advanced:                                          # Optional. Section to specify advanced options
+    restoreToOriginalReplicaCount: true/false        # Optional. Default: false
+    horizontalPodAutoscalerConfig:                   # Optional. Section to specify HPA related options
+      behavior:                                      # Optional. Use to modify HPA's scaling behavior
+        scaleDown:
+          stabilizationWindowSeconds: 60
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 15
+  triggers:
   - type: cron
     metadata:
       desiredReplicas: "6"
       start: 10 * * * *
       end: 35 * * * *
       timezone: Asia/Jerusalem
-
