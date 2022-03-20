@@ -81,6 +81,10 @@ spec:
             value: 100
             periodSeconds: 15
   triggers:
+  - type: memory
+    metadata:
+      type: Utilization
+      value: "85"
   - type: cron
     metadata:
       desiredReplicas: "6"
