@@ -68,7 +68,7 @@ spec:
  triggers:
   - type: cron
     metadata:
-      desiredReplicas: "6"
+      desiredReplicas: 6
       start: 10 * * * *
       end: 35 * * * *
       timezone: Asia/Jerusalem
