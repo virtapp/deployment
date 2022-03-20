@@ -72,7 +72,7 @@ spec:
     failureThreshold: 3                              # Mandatory if fallback section is included
     replicas: 6                                      # Mandatory if fallback section is included
   advanced:                                          # Optional. Section to specify advanced options
-    restoreToOriginalReplicaCount: true/false        # Optional. Default: false
+    restoreToOriginalReplicaCount: true        # Optional. Default: false
     horizontalPodAutoscalerConfig:                   # Optional. Section to specify HPA related options
       behavior:                                      # Optional. Use to modify HPA's scaling behavior
         scaleDown:
