@@ -84,10 +84,5 @@ spec:
   - type: memory
     metadata:
       type: Utilization
-      value: "85"
-  - type: cron
-    metadata:
-      desiredReplicas: "6"
-      start: 10 * * * *
-      end: 35 * * * *
-      timezone: Asia/Jerusalem
+      value: "50"
+
