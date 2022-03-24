@@ -94,6 +94,6 @@ spec:
       query: sum(increase(nginx_ingress_controller_requests[1m])) by (status) > 0  # Note: query must return a vector/scalar single element response
       threshold: '100'
       # Optional fields:
-      namespace: monitoring  # for namespaced queries, eg. Thanos
+      #namespace: monitoring  # for namespaced queries, eg. Thanos
  
  
