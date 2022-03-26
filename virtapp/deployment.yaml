@@ -52,20 +52,15 @@ spec:
     
     
 ---
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
+
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
 metadata:
- namespace: default
- name: wordpress-virtapp
+    namespace: default
+    name: myapp
 spec:
- scaleTargetRef:
-   kind:          Deployment
-   name:          wordpress-virtapp
- pollingInterval: 20
- minReplicaCount: 1
- maxReplicaCount: 10
- triggers:
-  - type: memory
-    metadata:
-      type: Utilization
-      value: "50"
+    scaleTargetRef:
+        deployment: wordpress-virtapp
+        service: wordpress-virtapp
+        port: 80
+        
