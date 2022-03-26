@@ -53,10 +53,11 @@ spec:
     
 ---
 
-kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
 metadata:
-    name: wordpress-virtapp
+  namespace: default
+  name: wordpress-virtapp
 spec:
     host: virtapp.io
     scaleTargetRef:
@@ -66,4 +67,3 @@ spec:
     replicas:
         min: 1
         max: 15
-
