@@ -56,11 +56,14 @@ spec:
 kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
-    namespace: default
-    name: myapp
+    name: wordpress-virtapp
 spec:
+    host: virtapp.io
     scaleTargetRef:
         deployment: wordpress-virtapp
         service: wordpress-virtapp
         port: 80
-        
+    replicas:
+        min: 1
+        max: 15
+
