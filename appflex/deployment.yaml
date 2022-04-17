@@ -64,7 +64,7 @@ spec:
    name:          wordpress-appflex
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 4
+ maxReplicaCount: 6
  advanced:
    restoreToOriginalReplicaCount: false
    horizontalPodAutoscalerConfig:
@@ -81,6 +81,6 @@ spec:
       timezone: Asia/Jerusalem
       start: 0 8 * * *
       end: 0 18 * * *
-      desiredReplicas: "4"
+      desiredReplicas: "3"
  
  
