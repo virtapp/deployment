@@ -53,17 +53,32 @@ spec:
     
 ---
 
-apiVersion: http.keda.sh/v1alpha1
-kind: HTTPScaledObject
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
 metadata:
-  namespace: default
-  name: wordpress-virtapp
+ namespace: default
+ name: wordpress-virtapp-keda
 spec:
-    host: virtapp.io
-    scaleTargetRef:
-        deployment: wordpress-virtapp
-        service: wordpress-virtapp
-        port: 80
-    replicas:
-        min: 1
-        max: 15
+ scaleTargetRef:
+   kind:          Deployment
+   name:          wordpress-virtapp
+ pollingInterval: 20
+ minReplicaCount: 1
+ maxReplicaCount: 4
+ advanced:
+   restoreToOriginalReplicaCount: false
+   horizontalPodAutoscalerConfig:
+     behavior:
+       scaleDown:
+         stabilizationWindowSeconds: 300
+         policies:
+         - type: Percent
+           value: 25
+           periodSeconds: 60
+ triggers:
+  - type: cron
+    metadata:
+      timezone: Asia/Jerusalem
+      start: 0 8 * * *
+      end: 0 18 * * *
+      desiredReplicas: "4"
