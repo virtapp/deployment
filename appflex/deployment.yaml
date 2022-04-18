@@ -83,4 +83,3 @@ spec:
       end: 0 18 * * *
       desiredReplicas: "4"
  
- 
