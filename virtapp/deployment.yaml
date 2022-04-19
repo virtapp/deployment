@@ -57,7 +57,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
  namespace: default
- name: wordpress-virtapp
+ name: wordpress-virtapp-object
 spec:
  scaleTargetRef:
    kind:          Deployment
