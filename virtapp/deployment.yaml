@@ -57,14 +57,25 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
  namespace: default
- name: wordpress-virtapp-object
+ name: wordpress-virtapp
 spec:
  scaleTargetRef:
+   apiVersion:    apps/v1  
    kind:          Deployment
    name:          wordpress-virtapp
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 3
+ maxReplicaCount: 6
+ advanced:
+   restoreToOriginalReplicaCount: false
+   horizontalPodAutoscalerConfig:
+     behavior:
+       scaleDown:
+         stabilizationWindowSeconds: 300
+         policies:
+         - type: Percent
+           value: 25
+           periodSeconds: 60
  triggers:
   - type: cron
     metadata:
