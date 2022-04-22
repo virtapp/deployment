@@ -1,3 +1,4 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,9 +65,9 @@ spec:
    name:          wordpress-appflex
  pollingInterval: 20
  minReplicaCount: 1
- maxReplicaCount: 6
+ maxReplicaCount: 3
  advanced:
-   restoreToOriginalReplicaCount: false
+   restoreToOriginalReplicaCount: true
    horizontalPodAutoscalerConfig:
      behavior:
        scaleDown:
@@ -82,4 +83,6 @@ spec:
       start: 0 8 * * *
       end: 0 23 * * *
       desiredReplicas: "3"
- 
+      
+      
+      
