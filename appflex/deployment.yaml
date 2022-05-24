@@ -66,16 +66,6 @@ spec:
  pollingInterval: 20
  minReplicaCount: 1
  maxReplicaCount: 6
- advanced:
-   restoreToOriginalReplicaCount:
-   horizontalPodAutoscalerConfig:
-     behavior:
-       scaleDown:
-         stabilizationWindowSeconds: 300
-         policies:
-         - type: Percent
-           value: 25
-           periodSeconds: 60
  triggers:
   - type: cron
     metadata:
