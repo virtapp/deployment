@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-appflex-v1
+  name: wordpress-appflex
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress-appflex-v1
+      app: wordpress-appflex
   template:
     metadata:
       labels:
-        app: wordpress-appflex-v1
+        app: wordpress-appflex
     spec:
       containers:
       - name: wordpress
@@ -42,81 +42,25 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-appflex-v1
+  name: wordpress-appflex
 spec:
   type: ClusterIP
   ports:
     - port: 80
   selector:
-    app: wordpress-appflex-v1
+    app: wordpress-appflex
 
 
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: wordpress-appflex-v2
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wordpress-appflex-v2
-  template:
-    metadata:
-      labels:
-        app: wordpress-appflex-v2
-    spec:
-      containers:
-      - name: wordpress
-        image: global-registry.virtapp.io/library/apache-appflex:0.9
-        resources:
-            requests:
-              memory: "1Gi"
-              cpu: 1
-            limits:
-              cpu: 2
-              memory: "2Gi"
-        ports:
-        - containerPort: 80
-        env:
-            - name: WORDPRESS_DB_HOST
-              value: mysql
-            - name: WORDPRESS_DB_NAME
-              value: appflex
-            - name: WORDPRESS_DB_USER
-              value: root
-            - name: WORDPRESS_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-pass
-                  key: password         
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress-appflex-v2
-spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-  selector:
-    app: wordpress-appflex-v2
-
-
----
 
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
  namespace: default
- name: wordpress-appflex-v1
+ name: wordpress-appflex
 spec:
  scaleTargetRef:
    kind:          Deployment
-   name:          wordpress-appflex-v1
+   name:          wordpress-appflex
  pollingInterval: 20
  minReplicaCount: 1
  maxReplicaCount: 6
@@ -128,25 +72,4 @@ spec:
       end: 0 23 * * *
       desiredReplicas: "3"
       
----
 
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
- namespace: default
- name: wordpress-appflex-v2
-spec:
- scaleTargetRef:
-   kind:          Deployment
-   name:          wordpress-appflex-v2
- pollingInterval: 20
- minReplicaCount: 1
- maxReplicaCount: 6
- triggers:
-  - type: cron
-    metadata:
-      timezone: Asia/Jerusalem
-      start: 0 8 * * *
-      end: 0 23 * * *
-      desiredReplicas: "3"
-      
