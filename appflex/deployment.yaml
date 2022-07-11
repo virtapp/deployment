@@ -65,7 +65,7 @@ spec:
  minReplicaCount: 1
  maxReplicaCount: 8
  advanced:
-    restoreToOriginalReplicaCount: false
+    restoreToOriginalReplicaCount: true
     horizontalPodAutoscalerConfig:
       behavior:
         scaleDown:
