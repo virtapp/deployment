@@ -59,10 +59,11 @@ metadata:
  name: wordpress-appflex
 spec:
  scaleTargetRef:
+   apiVersion:    apps/v1
    kind:          Deployment
    name:          wordpress-appflex
  pollingInterval: 20
- minReplicaCount: 2
+ minReplicaCount: 1
  maxReplicaCount: 8
  advanced:
     restoreToOriginalReplicaCount: true
