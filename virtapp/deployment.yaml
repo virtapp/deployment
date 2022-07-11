@@ -59,12 +59,18 @@ metadata:
  namespace: default
  name: wordpress-virtapp
 spec:
- scaleTargetRef:
-   kind:          Deployment
-   name:          wordpress-virtapp
- pollingInterval: 20
- minReplicaCount: 2
- maxReplicaCount: 8
+  scaleTargetRef:
+    apiVersion:    apps/v1                           # Optional. Default: apps/v1
+    kind:          Deployment                        # Optional. Default: Deployment
+    name:          wordpress-virtapp                 # Mandatory. Must be in the same namespace as the ScaledObject
+  pollingInterval:  30                               # Optional. Default: 30 seconds
+  cooldownPeriod:   300                              # Optional. Default: 300 seconds
+  idleReplicaCount: 0                                # Optional. Default: ignored, must be less than minReplicaCount 
+  minReplicaCount:  1                                # Optional. Default: 0
+  maxReplicaCount:  10                               # Optional. Default: 100
+  fallback:                                          # Optional. Section to specify fallback options
+    failureThreshold: 3                              # Mandatory if fallback section is included
+    replicas: 6 
  triggers:
   - type: cron
     metadata:
