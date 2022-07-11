@@ -59,7 +59,6 @@ metadata:
  name: wordpress-appflex
 spec:
  scaleTargetRef:
-   apiVersion:    apps/v1
    kind:          Deployment
    name:          wordpress-appflex
  pollingInterval: 20
