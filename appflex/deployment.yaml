@@ -60,7 +60,7 @@ metadata:
 spec:
   scaleTargetRef:
     apiVersion:    apps/v1                           # Optional. Default: apps/v1
-    kind:          deployment                        # Optional. Default: Deployment
+    kind:          Deployment                        # Optional. Default: Deployment
     name:          wordpress-appflex                 # Mandatory. Must be in the same namespace as the ScaledObject
 
   pollingInterval:  30                               # Optional. Default: 30 seconds
