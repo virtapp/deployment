@@ -50,32 +50,3 @@ spec:
   selector:
     app: wordpress-appflex
     
----
-
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
- namespace: default
- name: wordpress-appflex
-spec:
-  scaleTargetRef:
-    apiVersion:    apps/v1                           # Optional. Default: apps/v1
-    kind:          Deployment                        # Optional. Default: Deployment
-    name:          wordpress-appflex                 # Mandatory. Must be in the same namespace as the ScaledObject
-
-  pollingInterval:  30                               # Optional. Default: 30 seconds
-  cooldownPeriod:   300                              # Optional. Default: 300 seconds
-  idleReplicaCount: 0                                # Optional. Default: ignored, must be less than minReplicaCount 
-  minReplicaCount:  1                                # Optional. Default: 0
-  maxReplicaCount:  100                              # Optional. Default: 100
-  fallback:                                          # Optional. Section to specify fallback options
-    failureThreshold: 3                              # Mandatory if fallback section is included
-    replicas: 6 
- 
- triggers:
-  - type: cron
-    metadata:
-      timezone: Asia/Jerusalem
-      start: 0 8 * * *
-      end: 0 23 * * *
-      desiredReplicas: "4"
