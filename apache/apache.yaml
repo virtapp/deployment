@@ -1,0 +1,41 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-v1
+  labels:
+    app: apache-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache-v1
+  template:
+    metadata:
+      labels:
+        app: apache-v1
+    spec:
+      containers:
+      - name: apache
+        image: global-registry.virtapp.io/library/apache-default:0.1
+        ports:
+          - name: http-port
+            containerPort: 80
+      restartPolicy: Always
+      nodeSelector: {}
+        
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apache-v1
+spec:
+  selector:
+    app: apache-v1
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: 80
