@@ -18,7 +18,7 @@ spec:
       containers:
       - name: apache
         #image: global-registry.virtapp.io/library/apache-default:0.1
-        image: virtapp/apache:0.2
+        image: virtapp/apache:0.3
         ports:
           - name: http-port
             containerPort: 80
