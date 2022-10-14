@@ -81,4 +81,4 @@ spec:
       timezone: Asia/Jerusalem
       start: 0 8 * * *
       end: 0 23 * * *
-      desiredReplicas: "4"
+      desiredReplicas: "3"
