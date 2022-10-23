@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: virtapp/wordpress-virtapp:0.8
+        image: virtapp/wordpress-virtapp:0.9
         #image: global-registry.virtapp.io/library/apache-php:7.2
         resources:
             requests:
@@ -28,7 +28,7 @@ spec:
         - containerPort: 80
         env:
             - name: WORDPRESS_DB_HOST
-              value: mysql
+              value: mariadb-mariadb-galera
             - name: WORDPRESS_DB_NAME
               value: virtapp_io
             - name: WORDPRESS_DB_USER
