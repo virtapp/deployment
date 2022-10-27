@@ -66,12 +66,12 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-name: "session-route"
     nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300s"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "300s"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300s"
-    nginx.ingress.kubernetes.io/send-timeout: "300"
-    nginx.ingress.kubernetes.io/client-body-buffer-size: "5m"
-    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+    #nginx.ingress.kubernetes.io/proxy-connect-timeout: "300s"
+    #nginx.ingress.kubernetes.io/proxy-send-timeout: "300s"
+    #nginx.ingress.kubernetes.io/proxy-read-timeout: "300s"
+    #nginx.ingress.kubernetes.io/send-timeout: "300"
+    #nginx.ingress.kubernetes.io/client-body-buffer-size: "5m"
+    #nginx.ingress.kubernetes.io/proxy-body-size: "5m"
 spec:
   tls:
   - secretName: virtapp
@@ -116,4 +116,4 @@ spec:
       timezone: Asia/Jerusalem
       start: 0 7 * * *
       end: 0 23 * * *
-      desiredReplicas: "4"
+      desiredReplicas: "3"
