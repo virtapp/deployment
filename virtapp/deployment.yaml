@@ -62,16 +62,43 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-name: "session-route"
-    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-    #nginx.ingress.kubernetes.io/proxy-connect-timeout: "300s"
-    #nginx.ingress.kubernetes.io/proxy-send-timeout: "300s"
-    #nginx.ingress.kubernetes.io/proxy-read-timeout: "300s"
-    #nginx.ingress.kubernetes.io/send-timeout: "300"
-    #nginx.ingress.kubernetes.io/client-body-buffer-size: "5m"
-    #nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/cors-allow-headers: X-Forwarded-For
+    nginx.ingress.kubernetes.io/http2-push-preload: "true"
+    nginx.ingress.kubernetes.io/modsecurity-transaction-id: "$request_id"
+    nginx.ingress.kubernetes.io/ssl-ciphers: "ALL:!aNULL:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP"
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
+    nginx.ingress.kubernetes.io/enable-modsecurity: \"true\"
+      SecRuleEngine On
+      SecRequestBodyAccess On
+      SecAuditEngine RelevantOnly
+      SecAuditLogParts ABIJDEFHZ
+      SecAuditLog /var/log/modsec_audit.log
+      SecRule REQUEST_HEADERS:User-Agent \"fern-scanner\" \"log,deny,id:107,status:403,msg:\'Fern Scanner Identified\'\"
+      Include /etc/nginx/owasp-modsecurity-crs/nginx-modsecurity.conf
+      Include /etc/nginx/modsecurity/modsecurity.config
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Client-Cert $ssl_client_fingerprint;
+      add_header Cache-Control "max-age=0, no-cache, no-store, must-revalidate";
+      add_header X-Frame-Options SAMEORIGIN;
+      #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;'
+      more_set_headers "server-tokens: GSLB Technologies"
+      more_clear_headers "Server";
+      more_set_headers "X-Frame-Options: Deny";
+      more_set_headers "X-Xss-Protection: 1; mode=block";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      #more_set_headers X-GeoIP-Country $geoip_country_code;
+      #more_set_headers X-GeoIP-Country-Name $geoip_country_name;
+      #more_set_headers X-GeoIP-Region-Name $geoip_region_name;
+      #more_set_headers X-GeoIP-City $geoip_city;
+      #more_set_headers X-GeoIP-Postal-Code $geoip_postal_code;
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300s"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300s"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300s"
+    nginx.ingress.kubernetes.io/send-timeout: "300"
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "5m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
 spec:
   tls:
   - secretName: virtapp
