@@ -91,7 +91,7 @@ spec:
    kind:          Deployment
    name:          wordpress-virtapp
  pollingInterval: 20
- minReplicaCount: 2
+ minReplicaCount: 4
  maxReplicaCount: 10
  advanced:
    restoreToOriginalReplicaCount: false
@@ -109,4 +109,4 @@ spec:
       timezone: Asia/Jerusalem
       start: 0 7 * * *
       end: 0 23 * * *
-      desiredReplicas: "4"
+      desiredReplicas: "6"
