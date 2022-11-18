@@ -38,6 +38,10 @@ spec:
                 secretKeyRef:
                   name: mysql-pass
                   key: password
+      restartPolicy: Always
+      nodeSelector: {}
+        #node-role.kubernetes.io/master: "true"
+ 
  
 ---
 
