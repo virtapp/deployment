@@ -72,10 +72,8 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-change-on-failure: "false"
     nginx.ingress.kubernetes.io/affinity-mode: "balanced"
     nginx.ingress.kubernetes.io/server-snippet: |
-      location ~* \.(js|css|gif|jpe?g|png)$ {
-        expires 1M;
-        add_header Cache-Control "public";
-      }
+      expires 1M;
+      add_header Cache-Control "public";
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header X-Client-Cert $ssl_client_fingerprint;
       add_header Cache-Control "max-age=0, no-cache, no-store, must-revalidate";
