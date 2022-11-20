@@ -78,7 +78,7 @@ metadata:
       proxy_set_header X-Client-Cert $ssl_client_fingerprint;
       add_header Cache-Control "max-age=0, no-cache, no-store, must-revalidate";
       add_header X-Frame-Options SAMEORIGIN;
-      #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;'
+      add_header Strict-Transport-Security "max-age=31536000;includeSubdomains; preload";
       more_set_headers "server-tokens: GSLB Technologies"
       more_clear_headers "Server";
       more_set_headers "X-Frame-Options: Deny";
