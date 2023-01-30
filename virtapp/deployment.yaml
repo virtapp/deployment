@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: virtapp/wordpress-virtapp:0.9
+        image: virtapp/wordpress-virtapp:0.10
         #image: global-registry.virtapp.io/library/apache-php:7.2
         resources:
             requests:
