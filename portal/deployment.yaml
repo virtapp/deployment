@@ -1,52 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portal-argo
-  labels:
-    app: portal-argo
+  name: wordpress-virtapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: portal-argo
+      app: wordpress-virtapp
   template:
     metadata:
       labels:
-        app: portal-argo
+        app: wordpress-virtapp
     spec:
       containers:
-      - name: portal-argo
-        image: virtapp/portal-argo:2.1
-        envFrom: 
-        - configMapRef:
-            name: argo-config
+      - name: wordpress
+        image: virtapp/wordpress-virtapp:0.15
+        resources:
+            requests:
+              memory: "1Gi"
+              cpu: 1
+            limits:
+              cpu: 4
+              memory: "2Gi"
         ports:
-          - name: portal-port
-            containerPort: 80
-      imagePullSecrets:
-      - name: regcred
+        - containerPort: 80
+        env:
+            - name: WORDPRESS_DB_HOST
+              value: mariadb-galera
+            - name: WORDPRESS_DB_NAME
+              value: virtapp_io
+            - name: WORDPRESS_DB_USER
+              value: root
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
       restartPolicy: Always
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
-
-
-
+      nodeSelector: {}
+        #node-role.kubernetes.io/master: "true"
+ 
+ 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: portal-argo
-  namespace: default
-  labels:
-    app: "portal-argo"
-  annotations: {}
-    #cloud.google.com/neg: '{"ingress": true}'
-    #beta.cloud.google.com/backend-config: '{"ports": {"8080":"portal-argo-backendconfig"}}'
+  name: wordpress-virtapp
 spec:
-  selector:
-    app: "portal-argo"
+  type: ClusterIP
   ports:
     - port: 80
-      protocol: TCP
-      targetPort: 80
-  type: NodePort
+  selector:
+    app: wordpress-virtapp
+  
