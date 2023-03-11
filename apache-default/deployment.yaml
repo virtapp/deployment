@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpd-server
+  name: apache-default-app1
   labels:
-    app: httpd-server
+    app: apache-default-app1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: httpd-server
+      app: apache-default-app1
   template:
     metadata:
       labels:
-        app: httpd-server
+        app: apache-default-app1
     spec:
       containers:
-      - name: httpd-server
+      - name: apache-default-app1
         image: virtapp/apache-default:0.3
         ports:
           - name: http-port
@@ -30,10 +30,54 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: httpd-server
+  name: apache-default-app1
 spec:
   selector:
-    app: httpd-server
+    app: apache-default-app1
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: 80
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-default-app2
+  labels:
+    app: apache-default-app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache-default-app2
+  template:
+    metadata:
+      labels:
+        app: apache-default-app2
+    spec:
+      containers:
+      - name: apache-default-app2
+        image: virtapp/apache-default:0.3
+        ports:
+          - name: http-port
+            containerPort: 80
+      restartPolicy: Always
+      nodeSelector: {}
+        
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apache-default-app2
+spec:
+  selector:
+    app: apache-default-app2
   type: ClusterIP
   ports:
     - name: http-port
