@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
       - name: apache-default-app2
-        image: virtapp/apache-default:0.4
+        image: virtapp/apache-default:0.5
         ports:
           - name: http-port
             containerPort: 80
