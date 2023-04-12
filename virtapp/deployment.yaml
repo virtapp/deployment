@@ -22,7 +22,7 @@ spec:
               memory: "1Gi"
               cpu: 1
             limits:
-              cpu: 4
+              cpu: 2
               memory: "2Gi"
         ports:
         - containerPort: 80
