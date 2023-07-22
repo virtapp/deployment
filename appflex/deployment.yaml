@@ -18,11 +18,11 @@ spec:
         image: virtapp/wordpress-appflex:0.2
         resources:
             requests:
-              memory: "1Gi"
+              memory: "500Mi"
               cpu: 1
             limits:
               cpu: 2
-              memory: "2Gi"
+              memory: "1Gi"
         ports:
         - containerPort: 80
         env:
