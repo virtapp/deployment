@@ -102,7 +102,7 @@ spec:
    kind:          Deployment
    name:          wordpress-appflex
  pollingInterval: 20
- minReplicaCount: 2
+ minReplicaCount: 3
  maxReplicaCount: 10
  advanced:
    restoreToOriginalReplicaCount: false
